@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Book Tickets</h2>
+
+<mat-dialog-content>
+  <p>Event: <strong>{{ event.name }}</strong></p>
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Number of tickets</mat-label>
+    <input matInput type="number" min="1" [(ngModel)]="count" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="book()" [disabled]="loading">
+    {{ loading ? 'Booking...' : 'Book' }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,31 @@
+<div class="container" *ngIf="!loading; else loadingTpl">
+    <table mat-table [dataSource]="events" class="mat-elevation-z8 w-full">
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Event Name </th>
+        <td mat-cell *matCellDef="let e"> {{ e.name }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="availableTickets">
+        <th mat-header-cell *matHeaderCellDef> Available Tickets </th>
+        <td mat-cell *matCellDef="let e"> {{ e.availableTickets }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let e">
+          <button mat-raised-button color="primary" (click)="openBookDialog(e)">
+            Book Tickets
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  
+  <ng-template #loadingTpl>
+    <div class="loading">Loading events...</div>
+  </ng-template>
+  
