@@ -1,59 +1,70 @@
-# TicketingFrontend
+# Ticketing Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+An Angular 19 single-page application for browsing events and booking tickets. The UI is built with Angular Material and communicates with a backend API through the `/api` proxy defined in `src/proxy.conf.json`.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Event catalogue with availability indicators
+- Booking dialog that posts reservations to the API
+- Material Design components with responsive table layout
+- Snack-bar notifications for success and error states
 
-```bash
-ng serve
-```
+## Getting Started
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Prerequisites
 
-## Code scaffolding
+- Node.js 18+ (Angular CLI 19 works best with Node 20; Node 18 is supported with warnings)
+- npm 10+ (bundled with recent Node releases)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Install dependencies:
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+### Development Server
 
-To build the project run:
+Start the Vite-powered dev server (binds to all interfaces and proxies API calls to `http://127.0.0.1:8080`):
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Open the app at `http://localhost:4200/`. When running on another device in your LAN, use one of the network URLs that Angular prints to the terminal.
 
-## Running unit tests
+Ensure the backend service is available on port `8080`; otherwise the UI will display proxy errors when loading events or booking tickets.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Building for Production
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+The optimized output is emitted to `dist/ticketing-frontend/`.
 
-For end-to-end (e2e) testing, run:
+### Running Tests
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Executes Karma + Jasmine unit tests in watch mode.
 
-## Additional Resources
+## Project Structure
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+src/
+  app/
+    app.component.ts        # Root standalone component wiring the event list
+    app.config.ts           # Angular providers (router, animations, HttpClient)
+    components/
+      event-list/           # Event table and booking trigger
+      book-dialog/          # Ticket booking dialog
+    services/
+      event.service.ts      # HTTP client for event endpoints
+    models/
+      event.model.ts        # Event interface
+  proxy.conf.json           # Local dev API proxy
+```
+
+Feel free to extend the component set or adjust the proxy configuration to match your backend endpoints.
